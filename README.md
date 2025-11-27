@@ -1,4 +1,4 @@
-# EXPERIMENT--04-INTERFACING-AN16X2-LCD-DISPLAY-WITH-ARM AND DISPLAY STRING
+# EXPERIMENT 04 INTERFACING AN16X2 LCD DISPLAY WITH ARM AND DISPLAY STRING
 
 
  ## Aim: To Interface a 16X2 LCD display to ARM controller  , and simulate it in Proteus 
@@ -173,16 +173,46 @@ https://engineeringxpert.com/wp-content/uploads/2022/04/26.png
 
 
 ## STM 32 CUBE PROGRAM :
+```
+#include "main.h"
+#include "lcd.h"
+Lcd_PortType ports[]={GPIOA,GPIOA,GPIOA,GPIOA};
+Lcd_PinType pins[]={GPIO_PIN_3,GPIO_PIN_2,GPIO_PIN_1,GPIO_PIN_0};
+Lcd_HandleTypeDef lcd;
 
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
 
+  lcd=Lcd_create(ports,pins,GPIOB,GPIO_PIN_0,GPIOB,GPIO_PIN_1,LCD_4_BIT_MODE);
+  while (1)
+  {
+    lcd_display();
+  }
+}
+
+void lcd_display()
+{
+	Lcd_cursor(&lcd,0,1);
+	Lcd_string(&lcd,"R.Kshira\n");
+
+	Lcd_cursor(&lcd,1,1);
+	Lcd_string(&lcd,"212224220067\n");
+}
+```
 
 
 ## Output screen shots of proteus  :
+![WhatsApp Image 2025-09-17 at 09 07 56_a92a3fcf](https://github.com/user-attachments/assets/1feee0c4-aab9-40a7-b953-ef9f69486057)
+
  
- 
- ## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
- 
+## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
+<img width="1133" height="884" alt="image" src="https://github.com/user-attachments/assets/08c1e77b-8e83-4874-92b1-e2b8728dc37e" />
+
  
 ## Result :
 Interfacing a lcd display with ARM microcontroller are simulated in proteus and the results are verified.
-
